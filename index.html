@@ -34,8 +34,8 @@
     }
 
     .sobre,
-    .galeria,
-    .pudim {
+    .pudim,
+    .carrossel-section {
       padding: 40px 20px;
       text-align: center;
     }
@@ -89,7 +89,42 @@
       color: #fff;
     }
 
-    /* Responsividade para telas pequenas */
+    /* Carrossel */
+    .carrossel-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 30px auto;
+    }
+
+    .carrossel {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+      max-width: 320px;
+      overflow: hidden;
+    }
+
+    .carrossel img {
+      width: 100%;
+      flex-shrink: 0;
+      border-radius: 8px;
+    }
+
+    .carrossel-btn {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 0 5px;
+    }
+
+    /* Responsivo */
     @media (max-width: 600px) {
       header h1 {
         font-size: 1.5rem;
@@ -108,10 +143,15 @@
         width: 100%;
         padding: 14px;
       }
+
+      .carrossel-btn {
+        padding: 8px 12px;
+      }
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Delícias da Terê</h1>
     <p>Onde o sabor encontra a doçura!</p>
@@ -129,6 +169,7 @@
     <p>Somos apaixonados por doces e buscamos trazer as melhores experiências açucaradas para você!</p>
   </section>
 
+  <!-- Seletor de pudins -->
   <section class="pudim">
     <h2>Escolha seu Pudim Favorito</h2>
     <label for="pudimSelect">Tipos de Pudim:</label>
@@ -139,9 +180,23 @@
     </select>
 
     <div class="pudim-info">
-     <img id="pudimleite" src="pudimleite.jpg" alt="Pudim selecionado" />
+      <img id="pudimleite" src="pudimleite.jpg" alt="Pudim selecionado" />
       <div class="preco" id="precoPudim">R$ 45,00</div>
       <a href="#" class="botao-pedir" id="linkPedido" target="_blank">Pedir Agora</a>
+    </div>
+  </section>
+
+  <!-- Carrossel -->
+  <section class="carrossel-section">
+    <h2>Nossos Pudins em Destaque</h2>
+    <div class="carrossel-container">
+      <button class="carrossel-btn" onclick="voltar()">&#8592;</button>
+      <div class="carrossel" id="carrossel">
+        <img src="pudimleite.jpg" alt="Pudim Tradicional" />
+        <img src="pudimchocolate.jpg" alt="Pudim de Chocolate" />
+        <img src="hellokitty.jpg" alt="Pudim de Coco" />
+      </div>
+      <button class="carrossel-btn" onclick="avancar()">&#8594;</button>
     </div>
   </section>
 
@@ -173,6 +228,23 @@
       document.getElementById("pudimleite").src = pudins[valor].imagem;
       document.getElementById("precoPudim").textContent = pudins[valor].preco;
       document.getElementById("linkPedido").href = pudins[valor].link;
+    }
+
+    // Lógica do carrossel
+    let posicao = 0;
+
+    function avancar() {
+      const carrossel = document.getElementById("carrossel");
+      const total = carrossel.querySelectorAll("img").length;
+      posicao = (posicao + 1) % total;
+      carrossel.style.transform = `translateX(-${posicao * 100}%)`;
+    }
+
+    function voltar() {
+      const carrossel = document.getElementById("carrossel");
+      const total = carrossel.querySelectorAll("img").length;
+      posicao = (posicao - 1 + total) % total;
+      carrossel.style.transform = `translateX(-${posicao * 100}%)`;
     }
   </script>
 </body>
