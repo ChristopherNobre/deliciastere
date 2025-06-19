@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delícias da Terê</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #fff8f0;
+    }
+
+    header {
+      background-color: #ffb6c1;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    nav {
+      background-color: #ffc0cb;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      padding: 5px 10px;
+    }
+
+    .sobre,
+    .galeria,
+    .pudim {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .pudim {
+      background-color: #fff0f5;
+    }
+
+    .pudim img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+      margin-top: 20px;
+      transition: 0.3s;
+      height: auto;
+    }
+
+    .pudim-info {
+      margin-top: 20px;
+    }
+
+    .preco {
+      font-size: 18px;
+      color: #c71585;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .botao-pedir {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 24px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .botao-pedir:hover {
+      background-color: #ff1493;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffb6c1;
+      color: #fff;
+    }
+
+    /* Responsividade para telas pequenas */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 8px 0;
+      }
+
+      .pudim img {
+        max-width: 90%;
+      }
+
+      .botao-pedir {
+        width: 100%;
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Delícias da Terê</h1>
+    <p>Onde o sabor encontra a doçura!</p>
+  </header>
+
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Sobre</a>
+    <a href="#">Cardápio</a>
+    <a href="#">Contato</a>
+  </nav>
+
+  <section class="sobre">
+    <h2>Sobre Nós</h2>
+    <p>Somos apaixonados por doces e buscamos trazer as melhores experiências açucaradas para você!</p>
+  </section>
+
+  <section class="pudim">
+    <h2>Escolha seu Pudim Favorito</h2>
+    <label for="pudimSelect">Tipos de Pudim:</label>
+    <select id="pudimSelect" onchange="mudarImagem()">
+      <option value="tradicional">Pudim Tradicional</option>
+      <option value="chocolate">Pudim de Chocolate</option>
+      <option value="coco">Pudim de Coco</option>
+    </select>
+
+    <div class="pudim-info">
+      <img id="pudimleite" src="imagens/pudimleite.jpg" alt="Pudim selecionado" />
+      <div class="preco" id="precoPudim">R$ 45,00</div>
+      <a href="#" class="botao-pedir" id="linkPedido" target="_blank">Pedir Agora</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Delícias da Terê. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    const pudins = {
+      tradicional: {
+        imagem: "imagens/pudimleite.jpg",
+        preco: "R$ 45,00",
+        link: "https://wa.me/5592984324485?text=Quero%20pudim%20tradicional",
+      },
+      chocolate: {
+        imagem: "imagens/pudimchocolate.jpg",
+        preco: "R$ 55,00",
+        link: "https://wa.me/5592984324485?text=Quero%20pudim%20de%20chocolate",
+      },
+      coco: {
+        imagem: "imagens/hellokitty.jpg",
+        preco: "R$ 55,00",
+        link: "https://wa.me/5592984324485?text=Quero%20pudim%20de%20coco",
+      },
+    };
+
+    function mudarImagem() {
+      const valor = document.getElementById("pudimSelect").value;
+      document.getElementById("pudimleite").src = pudins[valor].imagem;
+      document.getElementById("precoPudim").textContent = pudins[valor].preco;
+      document.getElementById("linkPedido").href = pudins[valor].link;
+    }
+  </script>
+</body>
+</html>
